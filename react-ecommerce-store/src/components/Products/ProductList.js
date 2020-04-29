@@ -1,9 +1,23 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import Title from '../Title/Title';
+import { ProductContext } from '../../GlobalContext';
+import Product from './Product';
 
 const ProductList = () => {
-    return(
+    const context = useContext(ProductContext);
+    const products = context.products;
+    return (
         <>
-        <h3>Products list</h3>
+            <div className="py-5">
+                <div className="container">
+                    <Title name="our" title="products" />
+                    <div className="row">
+                        {
+                            products.map(product => <Product key={product.id} product={product} />)
+                        }
+                    </div>
+                </div>
+            </div>
         </>
     )
 }

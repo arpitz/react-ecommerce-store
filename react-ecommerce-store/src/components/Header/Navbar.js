@@ -2,17 +2,19 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import logo from '../../logo.svg';
+import { ButtonContainer } from '../../styled-components/ButtonContainer';
+
 
 const Navbar = () => {
     return(
         <>
-            <nav className="navbar navbar-expand-sm navbar-dark px-sm-5 bg-primary">
+            <NavWrapper className="navbar navbar-expand-sm navbar-dark px-sm-5">
                 <Link to="/">
                     <img src={logo} alt="phone" className="navbar-brand" />
                 </Link>
                 <ul className="navbar-nav align-items-center">
                     <li className="nav-item ml-5">
-                        <Link to="/" className="nav-link">Products</Link>
+                        <Link to="/" className="nav-link">products</Link>
                     </li>
                 </ul>
                 <Link to="/cart" className="ml-auto">
@@ -23,28 +25,20 @@ const Navbar = () => {
                         my cart
                     </ButtonContainer>
                 </Link>
-            </nav>
+            </NavWrapper>
         </>
     )
 }
 
-const ButtonContainer = styled.button`
-text-transform: capitalize;
-font-size: 1.4rem;
-background: transparent;
-border: 0.05rem solid var(--lightBlue);
-color: var(--lightBlue);
-padding: 0.2rem 0.5rem;
-border-radius: 0.5rem;
-margin: 0.2rem 0.5rem 0.2rem 0;
-transition: all 0.5s ease-in-out;
-&:hover {
-    background: var(--lightBlue);
-    color: var(--mainBlue);
-}
-&:focus {
-    outline: none;
-}
+const NavWrapper = styled.nav`
+    background: var(--mainBlue);
+    .nav-link {
+        color: var(--mainWhite) !important;
+        font-size: 1.3rem;
+        text-transform: capitalize;
+    }
 `
+
+
 
 export default Navbar;
