@@ -4,8 +4,9 @@ import { storeProducts, detailProduct } from './data';
 export const ProductContext = React.createContext();
 
 export const ProductProvider = ({ children }) => {
-    const [products, setProducts] = useState([]);
+    const [ products, setProducts ] = useState([]);
     const [ productDetails, setProductDetails ] = useState(detailProduct);
+    const [ cartItems, setCartItems ] = useState([]);
 
     // To make a separate copy of products and not to use/manipulate the same products received from data
     useEffect(() => {
@@ -22,8 +23,20 @@ export const ProductProvider = ({ children }) => {
     }
 
     const addToCart = (id) => {
-        console.log('added to cart id : '+ id);
+        let tempProducts = [...products];
+        const index = tempProducts.indexOf(getItem(id));
+        const product = tempProducts[index];
+        product.inCart = true;
+        product.count = 1;
+        product.total = product.price;
+        setProducts(tempProducts);
+        setCartItems([ ...cartItems, product ]);
     }
+
+    useEffect(() => {
+      console.log(cartItems);
+      console.log(products);
+    }, [cartItems]);
 
     const handleDetail = (id) => {
         const product = getItem(id);
