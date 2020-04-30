@@ -1,11 +1,12 @@
 import React, { useContext } from 'react';
 import { ProductContext } from '../../GlobalContext';
+import { Link } from 'react-router-dom';
+import { ButtonContainer }  from '../../styled-components/ButtonContainer'
 
 const ProductDetails = () => {
     const context = useContext(ProductContext);
-    const { detailProduct } = context;
+    const { detailProduct, addToCart } = context;
     const { id, img, title, price, company, info, inCart } = detailProduct;
-    console.log(detailProduct);
     return (
         <>
             <div className="container py-5">
@@ -32,6 +33,16 @@ const ProductDetails = () => {
                             some info about product:
                         </p>
                         <p className="text-muted lead">{info}</p>
+                        <div>
+                            <Link to="/">
+                                <ButtonContainer>back to products</ButtonContainer>
+                            </Link>
+                            <ButtonContainer cart disabled={ inCart }
+                                onClick = {() => addToCart(id)}
+                            >
+                                { inCart ? "in Cart" : " add to cart" }
+                            </ButtonContainer>
+                        </div>
                     </div>
                 </div>
             </div>

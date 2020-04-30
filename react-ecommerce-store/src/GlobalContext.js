@@ -16,10 +16,15 @@ export const ProductProvider = ({ children }) => {
         setProducts(tempProducts);
     }, []);
 
+    const addToCart = (id) => {
+        console.log('added to cart id : '+ id);
+    }
+
     return(
         <ProductContext.Provider value={{
             products,
-            detailProduct
+            detailProduct,
+            addToCart
         }}>
             { children }
         </ProductContext.Provider>
