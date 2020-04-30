@@ -5,8 +5,8 @@ import { ButtonContainer }  from '../../styled-components/ButtonContainer'
 
 const ProductDetails = () => {
     const context = useContext(ProductContext);
-    const { detailProduct, addToCart } = context;
-    const { id, img, title, price, company, info, inCart } = detailProduct;
+    const { productDetails, addToCart } = context;
+    const { id, img, title, price, company, info, inCart } = productDetails;
     return (
         <>
             <div className="container py-5">

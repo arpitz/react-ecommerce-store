@@ -5,6 +5,7 @@ export const ProductContext = React.createContext();
 
 export const ProductProvider = ({ children }) => {
     const [products, setProducts] = useState([]);
+    const [ productDetails, setProductDetails ] = useState(detailProduct);
 
     // To make a separate copy of products and not to use/manipulate the same products received from data
     useEffect(() => {
@@ -16,15 +17,25 @@ export const ProductProvider = ({ children }) => {
         setProducts(tempProducts);
     }, []);
 
+    const getItem = (id) => {
+        return products.find(item => item.id === id);
+    }
+
     const addToCart = (id) => {
         console.log('added to cart id : '+ id);
+    }
+
+    const handleDetail = (id) => {
+        const product = getItem(id);
+        setProductDetails(product);
     }
 
     return(
         <ProductContext.Provider value={{
             products,
-            detailProduct,
-            addToCart
+            productDetails,
+            addToCart,
+            handleDetail
         }}>
             { children }
         </ProductContext.Provider>
