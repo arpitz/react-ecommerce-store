@@ -7,6 +7,8 @@ export const ProductProvider = ({ children }) => {
     const [ products, setProducts ] = useState([]);
     const [ productDetails, setProductDetails ] = useState(detailProduct);
     const [ cartItems, setCartItems ] = useState([]);
+    const [ modalOpen, setModalOpen ] = useState(false);
+    const [ modalProduct, setModalProduct ] = useState(detailProduct);
 
     // To make a separate copy of products and not to use/manipulate the same products received from data
     useEffect(() => {
@@ -43,12 +45,25 @@ export const ProductProvider = ({ children }) => {
         setProductDetails(product);
     }
 
+    const openModal = (id) => {
+      setModalOpen(true);
+      setModalProduct(getItem(id));
+    }
+
+    const closeModal = () => {
+      setModalOpen(false);
+    }
+
     return(
         <ProductContext.Provider value={{
             products,
             productDetails,
             addToCart,
-            handleDetail
+            handleDetail,
+            modalOpen,
+            modalProduct,
+            openModal,
+            closeModal
         }}>
             { children }
         </ProductContext.Provider>

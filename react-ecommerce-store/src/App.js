@@ -7,6 +7,7 @@ import Navbar from './components/Header/Navbar';
 import { ProductList, ProductDetails } from './components/Products';
 import Cart from './components/Cart/Cart';
 import PageNotFound from './components/PageNotFound/PageNotFound';
+import Modal from './components/Modal/Modal';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/cart" component={ Cart } />
         <Route component={ PageNotFound } />
       </Switch>
+      <Modal />
     </>
   );
 }

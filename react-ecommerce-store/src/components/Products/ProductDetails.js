@@ -5,8 +5,14 @@ import { ButtonContainer } from '../../styled-components/ButtonContainer'
 
 const ProductDetails = () => {
   const context = useContext(ProductContext);
-  const { productDetails, addToCart } = context;
+  const { productDetails, addToCart, openModal } = context;
   const { id, img, title, price, company, info, inCart } = productDetails;
+
+  const handleAddToCart = (id) => {
+    addToCart(id);
+    openModal(id);
+  }
+
   return (
     <>
       <div className="container py-5">
@@ -38,7 +44,7 @@ const ProductDetails = () => {
                 <ButtonContainer>back to products</ButtonContainer>
               </Link>
               <ButtonContainer cart disabled={inCart}
-                onClick={() => addToCart(id)}
+                onClick={() => handleAddToCart(id)}
               >
                 {inCart ? "in Cart" : " add to cart"}
               </ButtonContainer>

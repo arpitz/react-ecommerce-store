@@ -7,7 +7,12 @@ import { ProductContext } from '../../GlobalContext';
 
 const Product = ({ product: { id, title, img, price, inCart } }) => {
 
-  const { handleDetail, addToCart } = useContext(ProductContext);
+  const { handleDetail, addToCart, openModal } = useContext(ProductContext);
+
+  const handleAddToCart = (id) => {
+    addToCart(id);
+    openModal(id);
+  }
 
   return (
     <ProductWrapper className="col-9 mx-auto col-md-6 col-lg-3 my-3">
@@ -17,7 +22,7 @@ const Product = ({ product: { id, title, img, price, inCart } }) => {
             <img src={img} alt="product" className="card-img-top" />
           </Link>
           <button className="cart-btn" disabled={inCart}
-            onClick={() => addToCart(id)}
+            onClick={() => handleAddToCart(id)}
           >
             {
               inCart ? (
