@@ -56,16 +56,43 @@ export const ProductProvider = ({ children }) => {
       setModalOpen(false);
     }
 
-    const increment = (id) => {
-      console.log('increment');
+    const findProductInCart = (id) => {
+      const tempCart = [...cartItems];
+      const selectedProduct = tempCart.find(item => item.id === id);
+      const index = tempCart.indexOf(selectedProduct);
+      return [tempCart[index], tempCart];
+    }
+
+    const increment = (id) => {   
+      const [product, tempCart] = findProductInCart(id);
+      product.count = product.count + 1;
+      product.total = product.count * product.price;
+      setCartItems([ ...tempCart ]);
     }
 
     const decrement = (id) => {
-      console.log('decrement');
+      const [product, tempCart] = findProductInCart(id);
+      product.count = product.count - 1;
+      if(product.count === 0)
+      removeItem(id);
+      product.total = product.count * product.price;
+      setCartItems([ ...tempCart ]);
     }
 
     const removeItem = (id) => {
-      console.log('removeItem');
+      // 1. remove that item from the cart array
+      // 2. change the parameters in original products
+      let tempCart = [ ...cartItems ];
+      tempCart = tempCart.filter(item => item.id !== id);
+      setCartItems([ ...tempCart ]);
+
+      let tempProducts = [ ...products ];
+      const index = tempProducts.indexOf(getItem(id));
+      const product = tempProducts[index];
+      product.inCart = false;
+      product.count = 0;
+      product.total = 0;
+      setProducts([ ...tempProducts ]);
     }
 
     const clearCart = () => {
