@@ -15,13 +15,17 @@ export const ProductProvider = ({ children }) => {
 
     // To make a separate copy of products and not to use/manipulate the same products received from data
     useEffect(() => {
-        let tempProducts = [];
+        newProductsCopy();
+    }, []);
+
+    const newProductsCopy = () => {
+      let tempProducts = [];
         storeProducts.forEach(product => {
             const singleItem = { ...product };
             tempProducts = [ ...tempProducts, singleItem ];
         })
         setProducts(tempProducts);
-    }, []);
+    }
 
     const getItem = (id) => {
         return products.find(item => item.id === id);
@@ -65,13 +69,13 @@ export const ProductProvider = ({ children }) => {
     }
 
     const clearCart = () => {
-      console.log('clearCart');
+      setCartItems([]);
     }
 
     const addTotals = () => {
       let subTotal = 0;
       cartItems.map(item => subTotal += item.total);
-      const tax = subTotal * 0.1; // Assuming the tax is 10%
+      const tax = parseFloat((subTotal * 0.1).toFixed(2)); // Assuming the tax is 10%
       const total = subTotal + tax;
       setCartSubTotal(subTotal);
       setCartTax(tax);
@@ -79,6 +83,9 @@ export const ProductProvider = ({ children }) => {
     }
 
     useEffect(() => {
+      if(!cartItems.length) {
+        newProductsCopy();
+      }
       addTotals();
     }, [ cartItems ])
 
