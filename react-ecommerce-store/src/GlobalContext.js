@@ -78,6 +78,7 @@ export const ProductProvider = ({ children }) => {
             modalProduct,
             openModal,
             closeModal,
+            cartItems,
             cartSubTotal,
             cartTax,
             cartTotal,
