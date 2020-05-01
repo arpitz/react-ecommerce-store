@@ -1,9 +1,16 @@
 import React from 'react';
+import Title from '../Title/Title';
+import CartColumns from './CartColumns';
+import EmptyCart from './EmptyCart';
 
 const Cart = () => {
     return(
         <>
-        <h3>cart</h3>
+          <section>
+            <Title name="your" title="cart" />
+            <CartColumns />
+            <EmptyCart />
+          </section>
         </>
     )
 }
