@@ -4,6 +4,7 @@ import CartColumns from './CartColumns';
 import EmptyCart from './EmptyCart';
 import { ProductContext } from '../../GlobalContext';
 import CartList from './CartList';
+import CartTotals from './CartTotals';
 
 const Cart = () => {
   const context = useContext(ProductContext);
@@ -11,10 +12,11 @@ const Cart = () => {
 
     return cartItems.length ? (
         <>
-          <section className="mt-2">
+          <section className="my-5">
             <Title name="your" title="cart" />
             <CartColumns />
             <CartList context={ context } />
+            <CartTotals context={ context } />
           </section>
         </>
     ) :

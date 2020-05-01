@@ -6,7 +6,7 @@ export const ProductContext = React.createContext();
 export const ProductProvider = ({ children }) => {
     const [ products, setProducts ] = useState([]);
     const [ productDetails, setProductDetails ] = useState(detailProduct);
-    const [ cartItems, setCartItems ] = useState([]);
+    const [ cartItems, setCartItems ] = useState(storeProducts);
     const [ modalOpen, setModalOpen ] = useState(false);
     const [ modalProduct, setModalProduct ] = useState(detailProduct);
     const [ cartSubTotal, setCartSubTotal ] = useState(0);
