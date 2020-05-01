@@ -6,7 +6,7 @@ export const ProductContext = React.createContext();
 export const ProductProvider = ({ children }) => {
     const [ products, setProducts ] = useState([]);
     const [ productDetails, setProductDetails ] = useState(detailProduct);
-    const [ cartItems, setCartItems ] = useState(storeProducts);
+    const [ cartItems, setCartItems ] = useState([]);
     const [ modalOpen, setModalOpen ] = useState(false);
     const [ modalProduct, setModalProduct ] = useState(detailProduct);
     const [ cartSubTotal, setCartSubTotal ] = useState(0);
@@ -67,6 +67,20 @@ export const ProductProvider = ({ children }) => {
     const clearCart = () => {
       console.log('clearCart');
     }
+
+    const addTotals = () => {
+      let subTotal = 0;
+      cartItems.map(item => subTotal += item.total);
+      const tax = subTotal * 0.1; // Assuming the tax is 10%
+      const total = subTotal + tax;
+      setCartSubTotal(subTotal);
+      setCartTax(tax);
+      setCartTotal(total);
+    }
+
+    useEffect(() => {
+      addTotals();
+    }, [ cartItems ])
 
     return(
         <ProductContext.Provider value={{
